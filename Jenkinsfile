@@ -1,6 +1,6 @@
 pipeline {
     agent { label 'rahulnode' }
-    triggers { upstream(upstreamProjects: 'starter project', threshold: hudson.model.Result.SUCCESS) }
+    triggers { upstream(upstreamProjects: 'starterproject', threshold: hudson.model.Result.SUCCESS) }
     stages {
         stage('scm') {
             steps {
