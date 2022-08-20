@@ -21,9 +21,18 @@ pipeline {
     post {
         always {
             mail from: "rp@gmail.com",
-                to: 'team@team.com',
+                to: 'team@rp.com',
                 subject: "Status of the pipeline ${currentBuild.fullDisplayName}",
                 body: "${env.BUILD_URL} has a result ${currentBuild.result}"
+
+        emailext attachLog: true,
+                body: """<p> Executed: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
+                </b></p><p>View console outpe at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}
+                </a>"</p> <p><i>Build log is attached </i> </p>""",
+                compressLog: true,
+                replyTo: "do-not-reply@rp.com",
+                to: "rpdevops@gmail.com",
+                subject: "${env.JOB_NAME} - Build ${env.BUILD_NUMBER} -Status ${currentBuild.result}"        
 
         }
     }
