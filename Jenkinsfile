@@ -18,4 +18,13 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            mail from: "rp@gmail.com",
+                to: 'team@team.com',
+                subject: "Status of the pipeline ${currentBuild.fullDisplayName}",
+                body: "${env.BUILD_URL} has a result ${currentBuild.result}"
+
+        }
+    }
 }    
